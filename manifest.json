@@ -1,0 +1,20 @@
+{
+  "name": "Rate of Trip Calculator",
+  "short_name": "TripCalc",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "Protection_Johor.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "Protection_Johor.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
