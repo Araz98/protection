@@ -246,5 +246,41 @@
         navigator.serviceWorker.register("service-worker.js");
       }
     </script>
+      <button id="installBtn" style="display:none">Install App</button>
+
+  <script>
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log('SW registered'))
+        .catch(err => console.error('SW registration failed', err));
+    }
+
+    // Handle beforeinstallprompt to show custom install button
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent Chrome's mini-infobar from appearing on mobile
+      e.preventDefault();
+      deferredPrompt = e;
+      // Show your own install button
+      installBtn.style.display = 'inline-block';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      installBtn.style.display = 'none';
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log('User choice', outcome);
+      deferredPrompt = null;
+    });
+
+    // Optional: detect app installed
+    window.addEventListener('appinstalled', () => {
+      console.log('PWA installed');
+    });
+  </script>
   </body>
 </html>
